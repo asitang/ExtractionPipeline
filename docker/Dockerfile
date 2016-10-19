@@ -19,8 +19,35 @@ FROM ubuntu
 MAINTAINER Thamme Gowda N.<tgowdan@gmail.com>
 
 # install missing part of ubuntu core
-RUN apt-get update && \
-    apt-get install -y software-properties-common software-properties-common
+RUN apt-get update && apt-get install -y \
+    software-properties-common software-properties-common \
+    imagemagick \
+    tesseract-ocr \
+    build-essential checkinstall \
+    libreadline-gplv2-dev libncursesw5-dev libssl-dev libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev
+
+ENV TESSDATA_PREFIX=/usr/share/tesseract-ocr/
+
+
+ADD http://raw.githubusercontent.com/asitang/Memex-Hbase/master/TesseractOCRConfig.properties /properties/TesseractOCRConfig.properties
+ADD https://github.com/USCDataScience/counterfeit-electronics-tesseract/blob/master/Training%20Tesseract/snum.traineddata?raw=true /usr/share/tesseract-ocr/tessdata/snum.traineddata
+ADD http://python.org/ftp/python/2.7.5/Python-2.7.5.tgz  /build/Python-2.7.5.tgz
+WORKDIR /build
+RUN tar -xvf Python-2.7.5.tgz
+WORKDIR /build/Python-2.7.5
+RUN ./configure
+RUN make
+RUN checkinstall -y
+
+RUN apt-get update && apt-get install -y \
+    python-pip python-dev build-essential
+RUN pip install --upgrade pip
+RUN pip install happybase
+RUN pip install simplejson
+RUN pip install mpipe
+
+
+
 
 # Install Java.
 RUN \
