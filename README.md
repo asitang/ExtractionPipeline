@@ -16,7 +16,7 @@ This project includes tools required to perform metadata analysis. Specifically,
     testbed/HT_extractions/data_images
 4. Place the python codes from https://github.com/asitang/Memex-Hbase.git into a code_folder
 5. Place all part files in HT_extractions/data_urllist
-6. Start the container
+6. Start the container  
 <code>docker run -it -d -v /path_to_testbed/:/mnt -v /path_to_code_folder:/code imagecat2</code>  
 7. From inside the container run  
 <code>cd /code</code>  
