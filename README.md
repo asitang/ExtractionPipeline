@@ -1,4 +1,4 @@
-# Imagecat Version 2
+# Extraction pipeline
 
 This project includes tools required to perform metadata analysis. Specifically, it uses Apache Tika to parse metadata from various files and then builds inverted index using solr.
 
@@ -7,29 +7,34 @@ This project includes tools required to perform metadata analysis. Specifically,
 
 1. Get and install docker for your operating system (if not already) https://www.docker.com/products/docker
 2. Build a docker image. This can be done by  
-```docker build . -f docker/Dockerfile -t imagecat2```
-3. get inside docker container and start services
-```
-docker run -it imagecat2 # or unique id for your build
-# starts solr
-/deploy/solr4/bin/solr start 
-
-# invokes parser indexer, more info check out https://github.com/USCDataScience/parser-indexer
-java -jar /deploy/parser-indexer/parser-indexer*.jar
-
-# Example 
-java -jar /deploy/parser-indexer/parser-indexer-1.0-SNAPSHOT.jar postdump -solr http://localhost:8983/solr/imagecatdev -in /etc/hosts
+```docker build . -f docker/Dockerfile -t imagecat2
 ```
 
-## Questions / Bugs / Features ?
+3. Create a directory called 'testbed'. Create the following folder structure inside testbed: 
+    testbed/HT_extractions/data_urllist
+    testbed/HT_extractions/data_imagelist
+    testbed/HT_extractions/data_extracted
+    testbed/HT_extractions/data_logs
+    testbed/HT_extractions/data_images
+4. Place the python codes from https://github.com/asitang/Memex-Hbase.git into a code_folder
+5. Place all part files in HT_extractions/data_urllist
+6. Start the container
+```
+docker run -it -d -v /path_to_testbed/:/mnt -v /path_to_code_folder:/code imagecat2
+```
 
-Please create issues at https://github.com/uscdataScience/imagecat2/issues
+
+7. From inside the container run
+```
+cd /code
+python p_pipeline.py
+```
+
+
 
 
 ## Developers
 
-+ Thamme Gowda
-+ Chris Mattmann
 
 
 
