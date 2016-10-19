@@ -7,7 +7,7 @@ This project includes tools required to perform metadata analysis. Specifically,
 
 1. Get and install docker for your operating system (if not already) https://www.docker.com/products/docker
 2. Build a docker image. This can be done by  
-<code>docker build . -f docker/Dockerfile -t imagecat2<code>
+<code>docker build . -f docker/Dockerfile -t imagecat2</code>
 3. Create a directory called 'testbed'. Create the following folder structure inside testbed: 
     testbed/HT_extractions/data_urllist
     testbed/HT_extractions/data_imagelist
@@ -17,10 +17,10 @@ This project includes tools required to perform metadata analysis. Specifically,
 4. Place the python codes from https://github.com/asitang/Memex-Hbase.git into a code_folder
 5. Place all part files in HT_extractions/data_urllist
 6. Start the container
-<code>docker run -it -d -v /path_to_testbed/:/mnt -v /path_to_code_folder:/code imagecat2<code>
+<code>docker run -it -d -v /path_to_testbed/:/mnt -v /path_to_code_folder:/code imagecat2</code>
 7. From inside the container run
-<code>cd /code<code>
-<code>python p_pipeline.py<code>
+<code>cd /code</code>
+<code>python p_pipeline.py</code>
 
 
 
