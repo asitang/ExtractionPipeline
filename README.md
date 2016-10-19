@@ -1,6 +1,6 @@
 # Extraction pipeline
 
-This project includes tools required to perform metadata analysis. Specifically, it uses Apache Tika to parse metadata from various files and then builds inverted index using solr.
+An extraction pipeline that runs Tika (with OCR and Tensorflow) on a large number of images
 
 
 ## Quick Start Using Docker
